@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+   <title>1</title>
+   <link rel="stylesheet" href="/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/css/input.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+   <!-- <svg>
+      <link rel="icon" href="icons">
+   </svg> -->
+
+   <!-- /*//////////////////////////////////////////////////////////*/
+      /*//////////////////////////////////////////////////////////*/
+      /* COLOR PALLET */
+      /*
+      #14365C - DARKBLUE
+      #F1FA39 - YELLOW
+      #E31717 - RED
+      #99998D - GRAY
+      #0E2747 - DARKBLUE */
+      
+      /*//////////////////////////////////////////////////////////*/ -->
+
+   <div class="search-box">
+      <input type="text" placeholder="Type to search..">
+      <div class="search-icon">
+         <i class="fas fa-search"></i>
+      </div>
+      <div class="cancel-icon">
+         <i class="fas fa-times"></i>
+      </div>
+      <div class="search-data">
+      </div>
+   </div>
+   
+   <script>
+      const searchBox = document.querySelector(".search-box");
+      const searchBtn = document.querySelector(".search-icon");
+      const cancelBtn = document.querySelector(".cancel-icon");
+      const searchInput = document.querySelector("input");
+      const searchData = document.querySelector(".search-data");
+      searchBtn.onclick = () => {
+         searchBox.classList.add("active");
+         searchBtn.classList.add("active");
+         searchInput.classList.add("active");
+         cancelBtn.classList.add("active");
+         searchInput.focus();
+         if (searchInput.value != "") {
+            var values = searchInput.value;
+            searchData.classList.remove("active");
+            searchData.innerHTML = "You just typed " + "<span style='font-weight: 500;'>" + values + "</span>";
+         } else {
+            searchData.textContent = "";
+         }
+      }
+      cancelBtn.onclick = () => {
+         searchBox.classList.remove("active");
+         searchBtn.classList.remove("active");
+         searchInput.classList.remove("active");
+         cancelBtn.classList.remove("active");
+         searchData.classList.toggle("active");
+         searchInput.value = "";
+      }
+   </script>
+
+
+   <div class="menu-container">
+      <a href="/mainpage" id="recordbtn"><button>Recording</button></a>
+      <a href="/table" id="recordList"><button>Lists of Recording</button></a>
+   </div>
+   <div class="container"
+      style="background: var(--bs-gray-400);text-align: center;margin-top: 276px;margin-left: auto;height: 475px;padding-right: 0px;padding-left: 0px;width: 85vw;border-width: 0px;border-style: solid;margin-right: auto;border-radius: 50px;">
+
+      <table id="logTable" class="logTable table-fixed">
+         <thead class="thead">
+            <tr class="thead-row">
+               <th id="filename" class="filename">Filename</th>
+               <th id="converted_text" class="converted_text">Converted Text</th>
+            </tr>
+         </thead>
+         <tbody class="tbody" id="tbody">
+
+         </tbody>
+
+         <script>
+            // Get references to the input field and the table body
+            const search = document.getElementById('searchInput');
+            const tableBody = document.getElementById('tbody');
+          
+            // Parse the JSON data
+            const jsonData = [
+    {
+      "input": {
+        "filename": "filename1"
+      },
+      "textarea": {
+        "convertedtext": "w"
+      }
+    },
+
+    {
+    "input": {
+      "filename": "ds,kbn"
+    },
+    "textarea": {
+      "convertedtext": "bakit pala"
+    }
+  },
+  {
+    "input": {
+      "filename": "lmj"
+    },
+    "textarea": {
+      "convertedtext": "hello my name is justin ehron a tumbaga"
+    }
+  },
+  {
+    "input": {
+      "filename": "s1"
+    },
+    "textarea": {
+      "convertedtext": "12"
+    }
+  },
+  {
+    "input": {
+      "filename": "node"
+    },
+    "textarea": {
+      "convertedtext": ""
+    }
+  },
+    // ... rest of the JSON data ...
+  ];
+
+
+          
+            // Function to update the table based on the search input
+            function updateTable() {
+              const searchTerm = searchInput.value.toLowerCase();
+          
+              // Clear the table body
+              tableBody.innerHTML = '';
+          
+              // Iterate over the JSON data and check if the filename matches the search term
+              for (const item of jsonData) {
+                const filename = item.input.filename.toLowerCase();
+                const convertedText = item.textarea.convertedtext.toLowerCase();
+          
+                if (filename.includes(searchTerm) || convertedText.includes(searchTerm)) {
+                  // Create a new table row
+                  const row = document.createElement('tr');
+          
+                  // Create table cells for filename and converted text
+                  const filenameCell = document.createElement('td');
+                  filenameCell.textContent = item.input.filename;
+                  const convertedTextCell = document.createElement('td');
+                  convertedTextCell.textContent = item.textarea.convertedtext;
+          
+                  // Append cells to the row
+                  row.appendChild(filenameCell);
+                  row.appendChild(convertedTextCell);
+          
+                  // Append the row to the table body
+                  tableBody.appendChild(row);
+                }
+              }
+            }
+          
+            // Add an event listener to the search input field
+            searchInput.addEventListener('input', updateTable);
+          
+            // Initially update the table to show all data
+            updateTable();
+          </script>
+          
+
+      </table>
+   </div>
+
+
+
+   <!-- JAVASCRIPT FUNCTION -->
+   <script src="/js/bootstrap.min.js"></script>
+   <!-- <script src="/js/function.js"></script> -->
+   <script src="/js/table.js"></script>
+   <script src="/js/input.js"></script>
+   <ul class="search-results"></ul>
+
+</body>
+
+</html>
